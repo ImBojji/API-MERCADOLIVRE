@@ -5,6 +5,6 @@ const server = http.createServer((req, res) => {
   res.end("API funcionando!");
 });
 
-server.listen(3000, () => {
-  console.log("Servidor rodando na porta 3000");
+server.listen(4000, () => {
+  console.log("Servidor rodando na porta 4000");
 });
