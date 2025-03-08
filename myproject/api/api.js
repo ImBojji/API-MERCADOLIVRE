@@ -6,9 +6,9 @@ export default async function handler(req, res) {
 
   const urlencoded = new URLSearchParams();
   urlencoded.append("grant_type", "refresh_token");
-  urlencoded.append("client_id", process.env.CLIENT_ID);
-  urlencoded.append("client_secret", process.env.CLIENT_SECRET);
-  urlencoded.append("refresh_token", process.env.REFRESH_TOKEN);
+  urlencoded.append("client_id", a.env.CLIENT_ID);
+  urlencoded.append("client_secret", a.env.CLIENT_SECRET);
+  urlencoded.append("refresh_token", a.env.REFRESH_TOKEN);
 
   const requestOptions = {
     method: "POST",
