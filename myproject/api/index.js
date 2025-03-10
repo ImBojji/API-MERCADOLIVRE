@@ -1,10 +1,11 @@
-const http = require("http");
+import express from "express";
 
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { "Content-Type": "text/plain" });
-  res.end("API funcionando!");
+const app = express();
+
+app.get("/", (req, res) => {
+  res.json({ message: "API funcionando!" });
 });
 
-server.listen(3000, () => {
-  console.log("Servidor rodando na porta 3000");
-});
+export default function handler(req, res) {
+  return app(req, res);
+}

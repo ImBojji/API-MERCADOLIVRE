@@ -102,10 +102,9 @@
     "vary": "^1.1.2"
   },
   "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node api/index.js",
-    "dev": "nodemon api/index.js"
+ "scripts": {
+  "start": "vercel dev",
+  "deploy": "vercel --prod"
   },
   "repository": {
     "type": "git",
