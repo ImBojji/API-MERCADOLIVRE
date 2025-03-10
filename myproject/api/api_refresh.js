@@ -1,11 +1,14 @@
-export default async function handler(req, res) {
+import dotenv from "dotenv";
+dotenv.config();
+
+export default async function getToken() {
   const myHeaders = new Headers();
   myHeaders.append("accept", "application/json");
   myHeaders.append("content-type", "application/x-www-form-urlencoded");
 
   const urlencoded = new URLSearchParams();
   urlencoded.append("grant_type", "refresh_token");
-  urlencoded.append("client_id", process.env.CLIENT_ID);
+  urlencoded.append("client_id", process.env.CLIENT_iD);
   urlencoded.append("client_secret", process.env.CLIENT_SECRET);
   urlencoded.append("refresh_token", process.env.REFRESH_TOKEN);
 
@@ -19,10 +22,21 @@ export default async function handler(req, res) {
   try {
     const response = await fetch("https://api.mercadolibre.com/oauth/token", requestOptions);
     const result = await response.json();
-    console.log("Novo token:", result);
-    return res.status(200).json(result);
+    console.log(result);
+    return result;
   } catch (error) {
-    console.error("Erro ao atualizar token:", error);
-    return res.status(500).json({ error: "Erro ao atualizar token" });
+    console.error(error);
+    throw error;
   }
 }
+
+getToken().catch(error => console.error('erro que foi obtido:',error))
+
+setInterval(async () => {
+  try{
+    console.log('gerando token...');
+    await getToken();
+  }catch(error){
+    console.error('erro obtido ao tentar regerar token:', error);
+  } 
+}, 5 * 60 * 60 * 1000);
