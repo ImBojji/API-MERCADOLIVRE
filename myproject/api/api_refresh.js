@@ -30,7 +30,7 @@ export default async function getToken() {
   }
 }
 
-getToken().catch(error => console.error('erro que foi obtido:',error))
+/*getToken().catch(error => console.error('erro que foi obtido:',error))
 
 setInterval(async () => {
   try{
@@ -39,4 +39,4 @@ setInterval(async () => {
   }catch(error){
     console.error('erro obtido ao tentar regerar token:', error);
   } 
-}, 5 * 60 * 60 * 1000);
+}, 5 * 60 * 60 * 1000);*/

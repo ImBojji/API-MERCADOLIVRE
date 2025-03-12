@@ -1,0 +1,26 @@
+{
+  "name": "api-mercadolivre",
+  "version": "1.0.0",
+  "main": "server.js",
+"scripts": {
+  "start": "node server.js",
+  "vercel-build": "echo 'Build concluído'"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ImBojji/API-MERCADOLIVRE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/ImBojji/API-MERCADOLIVRE/issues"
+  },
+  "homepage": "https://github.com/ImBojji/API-MERCADOLIVRE#readme",
+  "dependencies": {
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {},
+  "description": ""
+}
