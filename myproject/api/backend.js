@@ -43,7 +43,7 @@ getItems(process.env.SELLER_ID)
 
 async function saveitems(){
   const items = await getItems(process.env.SELLER_ID)
-  const arquivoJSON = 'Biblioteca_dos_produtos.json'
+  const arquivoJSON = ' biblioteca.json'
   try{ 
     await fs.writeFile(arquivoJSON, JSON.stringify(items,null,2))
     console.log(`biblioteca salva em ${arquivoJSON} `)
