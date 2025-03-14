@@ -22,15 +22,15 @@ export default async function getToken() {
   try {
     const response = await fetch("https://api.mercadolibre.com/oauth/token", requestOptions);
     const result = await response.json();
-    console.log(result);
-    return result;
+    console.log(result.access_token);
+    return result.access_token;
   } catch (error) {
     console.error(error);
     throw error;
   }
 }
 
-/*getToken().catch(error => console.error('erro que foi obtido:',error))
+getToken().catch(error => console.error('erro que foi obtido:',error))
 
 setInterval(async () => {
   try{
@@ -39,4 +39,4 @@ setInterval(async () => {
   }catch(error){
     console.error('erro obtido ao tentar regerar token:', error);
   } 
-}, 5 * 60 * 60 * 1000);*/
+}, 5 * 60 * 60 * 1000); // 5 horas para cada regeracao de token
