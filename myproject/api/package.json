@@ -1,7 +1,7 @@
 {
   "name": "api-mercadolivre",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "api/server.js",
   "type": "module",
   "dependencies": {
     "bson": "^6.10.3",
