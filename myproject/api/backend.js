@@ -1,10 +1,18 @@
 import dotenv from "dotenv";
 import getToken from "./api_refresh.js";
 import fetch from 'node-fetch'
-import fs from 'fs/promises'
+import moongoose from 'mongoose';
+import mongoose from "mongoose";
 dotenv.config();
 
+async function mongodbacess(){
+  moongoose.connect(process.env.HOST)
+  .then(() => console.log('Conectado ao banco de dados'))
+  .catch((error)=> console.error('Erro ao conectar ao banco de dados:', error))
+}
+
 export default async function getItems(seller_id){
+  await mongodbacess();
   const access_token = await getToken();
   if(!access_token) {
     console.error('erro ao obter token')
@@ -39,16 +47,40 @@ export default async function getItems(seller_id){
     console.error('Erro ao buscar item do vendedord:', error);
   }
 }
-getItems(process.env.SELLER_ID)
+
+const ProductSchema = new mongoose.Schema({
+  title: String,
+  id: String,
+  permalink: String,
+  category_id: String,
+  price: Number,
+  original_price: Number,
+  sale_price: {
+    amount: Number,
+    conditions: {
+      start_time: Date,
+      end_time: Date,
+    },
+    metadata:{
+      promotion_id: String,
+      campaign_discount_percentage: Number,
+      campaign_end_date: Date,
+    },
+  },
+},
+{strict: true})
+
 
 async function saveitems(){
-  const items = await getItems(process.env.SELLER_ID)
-  const arquivoJSON = ' biblioteca.json'
-  try{ 
-    await fs.writeFile(arquivoJSON, JSON.stringify(items,null,2))
-    console.log(`biblioteca salva em ${arquivoJSON} `)
-  } catch (error){
-     console.error('Erro ao salvar biblioteca:', error)
-  }
+  const item = await getItems(process.env.SELLER_ID)
+ 
+  const Product = mongoose.model('Product', ProductSchema);
+
+  Product.insertMany(item)
+   .then(()=> {
+    console.log('Items salvos!!')
+    mongoose.connection.close();
+   })
+   .catch((error) => console.error('Erro ao salvar items:', error))
 }
 saveitems()
